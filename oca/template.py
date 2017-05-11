@@ -22,7 +22,7 @@ class VmTemplate(PoolElement):
         'uname': str,
         'gname': str,
         'regtime': int,
-        'template': ['TEMPLATE', Template]
+        'template': ['TEMPLATE', Template, ['DISK']]
     }
 
     ELEMENT_NAME = 'VMTEMPLATE'
