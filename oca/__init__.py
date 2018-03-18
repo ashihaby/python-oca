@@ -122,9 +122,9 @@ class Client(object):
                 is_success, data, return_code = ret
             except ValueError:
                 logger.error(
-                    'Called function: {function}'
-                    'arguments: {args}'
-                    'Return value = {ret}'
+                    """Called function: {function}
+arguments: {args}
+Return value = {ret}"""
                     .format(
                         function=function, args=str(args),
                         ret=str(ret)
