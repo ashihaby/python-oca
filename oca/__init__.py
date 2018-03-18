@@ -126,7 +126,7 @@ class Client(object):
                        arguments: {args}
                        Return value = {ret}
                     """.format(
-                        function=function, args=','.join(args),
+                        function=function, args=str(args),
                         ret=str(ret)
                     )
                 )
