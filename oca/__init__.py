@@ -1,5 +1,6 @@
 # -*- coding: UTF-8 -*-
 import http.client
+import logging
 import os
 import re
 import socket
@@ -19,6 +20,8 @@ from .vn import VirtualNetwork, VirtualNetworkPool
 CONNECTED = -3
 ALL = -2
 CONNECTED_AND_GROUP = -1
+
+logger = logging.getLogger(__name__)
 
 
 class TimeoutHTTPConnection(http.client.HTTPConnection):
@@ -118,6 +121,15 @@ class Client(object):
             try:
                 is_success, data, return_code = ret
             except ValueError:
+                logger.error(
+                    """Called function: {function}
+arguments: {args}
+Return value = {ret}"""
+                    .format(
+                        function=function, args=str(args),
+                        ret=str(ret)
+                    )
+                )
                 data = ''
                 is_success = False
         except socket.error as e:
