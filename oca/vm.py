@@ -1,6 +1,8 @@
 # -*- coding: UTF-8 -*-
 from .pool import Pool, PoolElement, Template, extractString
+import logging
 
+logger = logging.getLogger(__name__)
 
 class History(Template):
     def __repr__(self):
