@@ -377,6 +377,7 @@ class VirtualMachine(PoolElement):
 class VirtualMachinePool(Pool):
     METHODS = {
         'info': 'vmpool.info',
+        'infoextended': 'vmpool.infoextended',
     }
 
     def __init__(self, client):
@@ -420,3 +421,31 @@ class VirtualMachinePool(Pool):
         """
         super(VirtualMachinePool, self).info(filter, range_start,
                                              range_end, vm_state)
+
+    def infoextended(self, filter_key_value_str):
+        """
+        Retrives/Refreshes extended resource pool information
+
+        ``filter``
+            Filter flag. By defaults retrieves only connected user resources.
+
+        ``range_start``
+            Range start ID. -1 for all
+
+        ``range_end``
+            Range end ID. -1 for all
+        """
+        self[:] = []
+        filter = 3
+        range_start = -1
+        range_end = -1
+        vm_state = -2
+        data = self.client.call(
+            self.METHODS['infoextended'], filter, range_start, range_end,
+            vm_state, filter_key_value_str
+        )
+        logger.debug("response")
+        logger.debug(str(data))
+        self._initialize_xml(data, self.pool_name)
+        for element in self.xml.findall(self.element_name):
+            self.append(self._factory(element))
