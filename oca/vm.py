@@ -377,6 +377,7 @@ class VirtualMachine(PoolElement):
 class VirtualMachinePool(Pool):
     METHODS = {
         'info': 'vmpool.info',
+        'infoextended': 'vmpool.infoextended',
     }
 
     def __init__(self, client):
@@ -420,3 +421,38 @@ class VirtualMachinePool(Pool):
         """
         super(VirtualMachinePool, self).info(filter, range_start,
                                              range_end, vm_state)
+
+    def infoextended(self, filter=-3, range_start=-1, range_end=-1,
+                     vm_state =-2, filter_key_value_str=''):
+        """
+        Retrives/Refreshes extended resource pool information
+
+        Note: Opennebula 5.8 curtailed the amount of info that can be obtained
+        via `one.vmpool.info`. The detailed info of a VM is now available via
+        `one.vmpool.infoextended` xml-rpc call.
+
+        http://docs.opennebula.org/5.8/intro_release_notes/release_notes/compatibility.html#xmlrpc-api-changes
+        https://github.com/OpenNebula/one/issues/3076
+
+        ``filter``
+            Filter flag. By defaults retrieves only connected user resources.
+
+        ``range_start``
+            Range start ID. -1 for all
+
+        ``range_end``
+            Range end ID. -1 for all
+
+        ``filter_key_value_str``
+            String that needs to be searched for in the vmpool. Default search
+            everything
+            e.g.: ID=3023
+        """
+        self[:] = []
+        data = self.client.call(
+            self.METHODS['infoextended'], filter, range_start, range_end,
+            vm_state, filter_key_value_str
+        )
+        self._initialize_xml(data, self.pool_name)
+        for element in self.xml.findall(self.element_name):
+            self.append(self._factory(element))
