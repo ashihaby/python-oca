@@ -447,10 +447,6 @@ class VirtualMachinePool(Pool):
             e.g.: ID=3023
         """
         self[:] = []
-        filter = -3
-        range_start = -1
-        range_end = -1
-        vm_state = -2
         data = self.client.call(
             self.METHODS['infoextended'], filter, range_start, range_end,
             vm_state, filter_key_value_str
