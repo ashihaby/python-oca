@@ -438,7 +438,7 @@ class VirtualMachinePool(Pool):
             Range end ID. -1 for all
         """
         self[:] = []
-        filter = 3
+        filter = -3
         range_start = -1
         range_end = -1
         vm_state = -2
