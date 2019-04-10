@@ -422,7 +422,8 @@ class VirtualMachinePool(Pool):
         super(VirtualMachinePool, self).info(filter, range_start,
                                              range_end, vm_state)
 
-    def infoextended(self, filter_key_value_str):
+    def infoextended(self, filter=-3, range_start=-1, range_end=-1,
+                     vm_state =-2, filter_key_value_str=None):
         """
         Retrives/Refreshes extended resource pool information
 
