@@ -423,7 +423,7 @@ class VirtualMachinePool(Pool):
                                              range_end, vm_state)
 
     def infoextended(self, filter=-3, range_start=-1, range_end=-1,
-                     vm_state =-2, filter_key_value_str=None):
+                     vm_state =-2, filter_key_value_str=''):
         """
         Retrives/Refreshes extended resource pool information
 
@@ -443,7 +443,8 @@ class VirtualMachinePool(Pool):
             Range end ID. -1 for all
 
         ``filter_key_value_str``
-            String that needs to be searched for in the vmpool
+            String that needs to be searched for in the vmpool. Default search
+            everything
             e.g.: ID=3023
         """
         self[:] = []
