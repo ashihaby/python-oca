@@ -1,8 +1,6 @@
 # -*- coding: UTF-8 -*-
 from .pool import Pool, PoolElement, Template, extractString
-import logging
 
-logger = logging.getLogger(__name__)
 
 class History(Template):
     def __repr__(self):
@@ -436,6 +434,10 @@ class VirtualMachinePool(Pool):
 
         ``range_end``
             Range end ID. -1 for all
+
+        ``filter_key_value_str``
+            String that needs to be searched for in the vmpool
+            e.g.: ID=3023
         """
         self[:] = []
         filter = -3
@@ -446,8 +448,6 @@ class VirtualMachinePool(Pool):
             self.METHODS['infoextended'], filter, range_start, range_end,
             vm_state, filter_key_value_str
         )
-        logger.debug("response")
-        logger.debug(str(data))
         self._initialize_xml(data, self.pool_name)
         for element in self.xml.findall(self.element_name):
             self.append(self._factory(element))
