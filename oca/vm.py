@@ -428,7 +428,8 @@ class VirtualMachinePool(Pool):
         Retrives/Refreshes extended resource pool information
 
         Note: Opennebula 5.8 curtailed the amount of info that can be obtained
-        via `one.vmpool.info`
+        via `one.vmpool.info`. The detailed info of a VM is now available via
+        `one.vmpool.infoextended` xml-rpc call.
 
         http://docs.opennebula.org/5.8/intro_release_notes/release_notes/compatibility.html#xmlrpc-api-changes
         https://github.com/OpenNebula/one/issues/3076
