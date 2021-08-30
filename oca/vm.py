@@ -146,7 +146,7 @@ class VirtualMachine(PoolElement):
         'gname': extractString,
         'name': extractString,
         # 'permissions': ???,
-        'last_poll': int,
+        # 'last_poll': int,
         'state': int,
         'lcm_state': int,
         'resched': int,
